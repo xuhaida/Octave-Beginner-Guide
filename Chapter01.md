@@ -33,7 +33,7 @@ GNU Octave的命名来自于化学家Octave Levenp，与音乐，条谐波无关
 
 **Octave的缺陷**
 
-Octave主要设计用于进行数值计算，而不是作为通用性编程语言，比如C和C++。正因如此，读者应该根据问题来选择编程语言。然而，Octave也会在许多功能上对你有所帮助，比如读写文件，也可以使用socket阮籍包来直接接入网络。
+Octave主要设计用于进行数值计算，而不是作为通用性编程语言，比如C和C\++。正因如此，读者应该根据问题来选择编程语言。然而，Octave也会在许多功能上对你有所帮助，比如读写文件，也可以使用socket阮籍包来直接接入网络。
 Octave使用解释器这个事实，使得Octave首先将指令转换成可以读的代码。这是有利的。主要的好处是指令易于执行和变动，而不用通过转换、转换和运行。给予程序者用户更高程序的控制权。不利之处是与编译型程序比较，运行较慢。如果读者想模拟大规模并行运算，诸如天气预报。Octave就不是读者的首选。
 但是，正如读者将会在本书后面遇到的。Octave可以让读者解决非常高级和计算密集型问题。只需要一些指令型命令就可以得到满意的速度。最后一章会较会读者一些优化技巧。读者还可以使用C++来以非常可观的速度来加速Octave。
 Octave未被设计成用于分析数学。如果读者想得到一个函数，譬如f（x）=x2的导数。这里诸如Maxima和Sage的软件包可能是有帮助的。值得一提的是，Octave中包含有一个软件包（软件包通常也被称为工具包），可以做出一些基本的分析数学。
@@ -63,7 +63,7 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
  8. 安装好后，读者可以变动菜单。如果你原意的话，读者也可以检查Readme文件。如果不想的话，只需要Next按钮，就大功告成了。
 注意：Octave的交互环境会出现，想关闭的话，只需要输入：
 
-    octave:1>   exit
+        octave:1>   exit
 
 或者同时按下Ctrl和D键。我们将这种组合记作Ctrl+D，顺便说一下：Ctrl+D是Unix系统中文件休止符的提示符。经常作为推出程序的一种快捷键。
 其他方式，读者还可以通过Cygwin运行Octave于Windows中。与GNU/Linux环境下Windows环境下。这儿不会仔细研究Cygwin的Windows安装。但是读者可以方便地参考Cygwin网页http://www.Cygwin.com
@@ -72,7 +72,7 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
 
 在许多GNU/Linux发行版本中，Octave是推荐软件的一部分。因此，在安装Octave之前，检查一下该软件是否已经安装于读者的电脑上。如何做，打开一个终端。在终端shell下输入下面的指令：
 
-    $Octave
+        $ Octave
 
 如果Octave已经确定正确安装，读者在命令行下可以看到Octave命令。现在可以输入下面的命令退出。另外，读者也也可以运用Ctrl+D，即同时按住Ctrl+D键。
 如果Octave未被安装，读者也可以使用发行版中的软件包管理系统安装。比如，在Ubuntu中，读者可以可以使用Synaptic 软件管理包。该包管理器有图形界面来安装和删除电脑上的软件。读者可以参考下面的截图。至于Fedora和CentOs，读者可以采用YUM。
@@ -93,31 +93,31 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
  1. 从http://www.gnu.org下载最新的Octave版本并保存到任何目录下。该文件是一个压缩文件，使用.tar.gz作为压缩扩展名。
  2. 打开终端，进入已下载源码文件目录。输入下面的命令解压缩文件：
 
-     $ tar zxf octave-version.tar.gz
+        $ tar zxf octave-version.tar.gz
 
  3. 这里version指的是版本号。该命令会创建名为octave-version的目录。
 
  4. 输入以下命令进入该目录：
 
-    $ cd octave-version
+        $ cd octave-version
 
  5. 现在我们可以输入下面的命令对构建和编译过程进行配置：
 
-    $ ./configure
+        $ ./configure
 
  6. 如果配置过程没有问题，我们就可以输入下面的命令编译Octave源代码（需要一段时间）：
 
-    $ make
+        $ make
 
  7. 在实际安装之前，读者可以测试一下构建过程是否正确。为如此目的，输入下面的命令：
 
-    $ make check
+        $ make check
 
  8. 其中一些测试会失败。但是，这并不是意味着构建过程是不成功的。测试不是强制的。
 
  9. 为了安装Octave到电脑上，读者必须有root权限。比如说，读者可以输入下面的命令：
 
-   $ sudo make install
+        $ sudo make install
 
  10. 现在输入root密码。好了，大功告成。
 
@@ -134,16 +134,27 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
 **实战练习-用peaks检查**
 
  1. 读者可以输入octave进入交互环境或者在Windows中双击Octave图标。现在读者可以看到prompt：
-    octave:1>
+
+        octave:1>
+
  2. 读者已经学过如何退出交互环境。只需要在Octave中输入exit或者按下Ctrl+D，但是我们现在不打算退出。
+
  3. 在中，输入如下命令：
-    octave：1>surf（peaks）
+
+        octave：1>surf（peaks）
+
  4. 现在读者可以看到一个3维surface图，正如下图中左边的所示图片。如果不是的话，说明读者的安装没有成功，将你的鼠标箭头指向窗口，摁住鼠标往下拉，移动箭头。如果做图程序支持的话，图画会按照你指的方向转动。如果读者，可以通过。
+
  5. 让我们试一下截面图。输入下面命令：
-    octave：2>contour(peaks)
+
+        octave：2>contour(peaks)
+
  6. 出现的图会像右边的图一样？如果不是的话，可能是因为读者使用了3.2.4版本而安装了oct2mat软件包。尝试着输入：
-    octava:3 > pkg unload oct2mat
+
+        octava:3 > pkg unload oct2mat
+
  7. 现在重新输入上面的命令
+
  8. 点击窗口右边图中
 
 **刚才发生了什么？**
@@ -168,17 +179,21 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
 让我们假定Octave主目录为C：\Documents and Settings\GNU Octave\。我们可以实际上从Octave中直接创建；因此，让我们继续。
 
  1. 启动Octave，输入下面命令：
-    octave: 1>cd C:
-    octave: 1>cd "Documents and settings"
-    octave::3>mkdir "GNU Octave"
-    ans=1
+
+        octave: 1>cd C:
+        octave: 1>cd "Documents and settings"
+        octave::3>mkdir "GNU Octave"
+        ans=
+              1
+
  2. 响应ans=1出现命令行之后，意味着目录已经成功创建。如果Octave返回令值，表明出现了一些错误，而且Octave也会打印出一条错误信息。除了通过Octave来创建目录以外，读者也可以在Windows管理器中创建。
+
  3. 我们还需要告诉解释器现在是在Octave主目录。我们可以在OCtave中这样做：
 
-    Octave: 4>  edit
+        Octave: 4>  edit
 
- 4. 现在读者可以看到一个编辑器弹出。在Windows下的默认编辑器是Notepad++。打开文件:c:\octave-home\share\octave\site\m\startup\octaverc，其中octave-home指的是Octave的安装路径，比如，Octave\3.2.4_gcc-4.4.0。在该文件中的末尾加入下面这一行：setenv('HOME','C:\Document and Settings\GNU Octave\');cd ~/
-确认没有输入错误！
+ 4. 现在读者可以看到一个编辑器弹出。在Windows下的默认编辑器是Notepad++。打开文件:c:\octave-home\share\octave\site\m\startup\octaverc，其中octave-home指的是Octave的安装路径，比如Octave\3.2.4_gcc-4.4.0。在该文件中的末尾加入下面这一行：setenv('HOME','C:\Document and Settings\GNU Octave\');cd ~/ 确认没有输入错误！
+
  5. 保存文件，退出编辑器，重启Octave，一切大功告成。
 
 **刚才发生了什么？**
@@ -196,30 +211,39 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
     octave: 1 > edit
 
  2. 将下面的几行命令复制至文件里，将文件保存成.octaverc到Octave的主目录。如果是Windows的话，在用户目录下，GNU/Linux。或者，用读者自己最喜爱的编辑器来创建这个文件：
-   PS（">>   ")
-  edit mode "async"
 
-退出编辑器，重启Octave。
+        PS（">>   ")
+        edit mode "async"
+
+    退出编辑器，重启Octave。
 
 **更多关于.octaverc的内容**
 
 默认编辑器可以在.octaverc文件中。这可以通过在你的文件里加入下面的这一句：
 
-    edit editor name of the editor
+        edit editor name of the editor
 
 这里name of the editor就是读者的编辑器。读者使用Windows中的话，可以选择notepad，在GNU/Linux中为gedit。再一次，在加入.octaverc文件，读者需要测试一下编辑器是否可以在Octave中调用。
 
 后面的章节里，我们会脚本和函数文件。Octave将会不得不来指定何处可以找到这些文件来阅读他们。Octave使用一直路径结构来收缩文件，学会如何告诉Octave来寻找这些文件是非常重要的。我推荐读者在主目录中创建一个新的文件夹，将名字命名成Octave。读者就可以将自己的Octave文件放置于该文件夹中，让解释器自己来寻找它们。
 
 让我们首先创建文件夹。这个很简单，只要进入Octave，然后输入下面的命令：
-    octave：1>cd ~/
-    octave：2>mkdir octave
+
+        octave：1>cd ~/
+        octave：2>mkdir octave
+
 显而易见，这些命令是干什么的。现在，输入这些：
-    octave: 3>edit .octaverc
+
+        octave: 3>edit .octaverc
+
 将下面这一行加入至文件中：
-   addpath("~/octave/")
+
+        addpath("~/octave/")
+
 保存这个文件，退出编辑器，重启Octave，或者使用source（”.octaverc")。在Octave的行中，输入下面的命令：
-    octave： 1 > path
+
+        octave： 1 > path
+
 现在读者可以看到~/octave/已经被加入至搜索路径中了。在Windows下面，该路径为所有用户使用。路径列表很长，因此读者需要。当读者到达最后的时候，读者可以点击Q键来退出。
 
 **安装附加软件包**
@@ -230,49 +254,52 @@ Octave主要被设计成运行于GNU/Linux下，但是读者也可以在Windows�
 
  1. 在安装新的软件包之前，读者需要检查一下该软件包是否已经存在，以及他们的软件版本号。如果读者还没有的话，可以使用下面的命令：
 
-    octave： 1>pkg list
+        octave： 1>pkg list
 
  2. 读者可以看到一张列表，包含软件包名称，版本号，和安装路径。比如：
-Package Name  |  Version | Installation directory
---------------------+-----------+--------------------------
-combinatorics   | 1.0.6      | /octave/package/combinatorics-1.0.6
+
+        Package Name  |  Version | Installation directory
+        --------------------+-----------+----------------------
+        combinatorics |1.0.6|/octave/package/combinatorics-1.0.6
 
  3. 如果读者选择将所有的软件包安装至资金的Windows安装，列表会很长。如果msh软件包已经安装，如果已经安装，可以看一下它的版本号。然后，读者就可以按下Q键退出。
 
  4. 现在可以去Octave-forge网页，找到msh软件包，点击Details（在软件包的右面）。现在读者会看一个窗口，含有软件包的详细描述，正如下面图片中所示的。软件包的版本号是否比现在的要高？（如果不是的话，做下来，放松，然后读下面的文字作为享乐）。软件包描述中也显示msh软件包依赖spline软件包和版本高于3.0.0的Octave。但是，spline软件包也许没有在你的系统上安装。在前面的软件包列表中有没有看到spline软件包？如果没有的话，我们需要在安装msh软件包之前安装spline软件包。回到主软件包列表，将msh和spline软件包都下载至自己的Octave主目录。（顺便带一句，spline软件包是否也有依赖）。下载的文件已经具有.tar.gz扩展名。为了安装该软件包，确认你现在位于自己的Octave主目录中，输入下面命令：
 
-    octave：2 > pkg install splines-version-number.tar.gz (如果必要的话）
-
-    octave：3 > pkg install msh-version-number.tar.gz
+        octave：2 > pkg install splines-version-number.tar.gz (如果必要的话）
+        octave：3 > pkg install msh-version-number.tar.gz
 
  5. 确定已经将软件包文件下载至Octave主目录。
 
  6. 检测读者自己的新软件包列表，输入下面命令：
-    octave：4> pkg list
 
-    Package Name  |  Version | Installation directory
-    --------------------+-----------+--------------------------
-    combinatorics   | 1.0.6      | /octave/package/combinatorics-1.0.6
-    msh                  |  1.0.1     | /octave/package/msh-1.0.5
+        octave：4> pkg list
+        Package Name  |  Version | Installation directory
+        --------------------+-----------+--------------------------
+        combinatorics   | 1.0.6      | /octave/package/combinatorics-1.0.6
+        msh                  |  1.0.1     | /octave/package/msh-1.0.5
 
 
  7. 现在读者可以输入下面的命令来获取msh软件包的详细描述：
-    octave： 5 > package describe msh
-    ---
-    Package name:
-        msh
-    Version:
-        1.0.10
-   Short description:
+
+        octave： 5 > package describe msh
+        ---
+        Package name:
+          msh
+        Version:
+          1.0.10
+        Short description:
         Create and manage triangular and tetrahedral meshes for Finite Element or Finite Volume PDE solvers. Use a mesh data structure compatible with PDEtool. Rely on gmsh for unstructured mesh generation.
-Status:
+        Status:
         Not loaded
 
  8. 从状态上看，读者可以看到该软件包没有载入，意味着我们不能使用软件包中所带的功能。为了载入软件包，简单地输入：
-    ocave：6>pkg load msh
+
+        ocave：6>pkg load msh
 
  9. 读者可以使用pkg describe msh来检查该软件包是否载入。实际上，读者可以写在软件包，使用下面的命令：
-    octave：7>pkg unload msh
+
+        octave：7>pkg unload msh
 
 **刚才发生了什么**
 
@@ -280,21 +307,24 @@ Status:
 
 读者可能会觉得有点奇怪，为了使用软件包，你需要载入软件包。如果在安装的时候加入-auto选项，就可以自动将软件包载入。比如，命令3可以用下面的命令行代替:
 
-    octave: 3> pkg installl -auo msh-vestion-number.tar.gz
+        octave: 3> pkg installl -auo msh-vestion-number.tar.gz
 
 有些软件包即使没有明确载入，也会自动载入。读者这时候可以用-noauto来强制软件包不予载入。
 
-      octave: 3> pkg installl -noauto msh-vestion-number.tar.gz
+        octave: 3> pkg installl -noauto msh-vestion-number.tar.gz
 
 **卸载软件包**
 
 卸载软件包非常容易：
-    octave：8>pkg uninstall msh
+
+        octave：8>pkg uninstall msh
+
 注意读者会得到一个错误信息如果试着在卸载msh之前卸载splines，因为msh依赖splines。
 
 **获取帮助**
 
 pkg命令非常灵活，可以和很多选项一起调用。读者可以输入下面的命令来获取所有的选项。
 
-    octave： 9 > help pkg
+        octave： 9 > help pkg
+        
 pkg的帮助文档非常长。
