@@ -93,4 +93,73 @@
 
 Octave函数可以处理多种用户输入。比如，如果用户输入文本或者矩阵数组作为输入参数？如果它将3个变量赋值给函数输出？看一下，我们这样做后会有什么状况：
 
-        octave:6> [min]
+        octave:6> [mina maxa]= minmax("Hello world")
+        octave:7> [mina maxa]= minmax([1 2;3 4])
+        octave:8> [a b c]= minmax([1 2 3 4])
+
+命令6中，minmax函数调用文本型输入参数。这个文本被传递给max（代码示例5.2中第12行），出现一个错误。在调用max之前来捕获该错误是令人期待的。因为用户很容易混淆，如果她得到一个错误信息从max而不是从minmax这个函数调用。
+
+命令7里，minmax调用矩阵输入参数。即使这个函数没有功能处理矩阵数组，函数返回了矩阵每列中的最小值和最大值。这当然是因为max函数和min函数是逐行工作的。但是，既然minmax最初被设计成用来应用于向量数组，我们需要处理矩阵输入。
+
+最后，我们会收到一条通用错误信息，如果我们调用minmax3至4个输出变量。我们应该给出提示性信息，来告诉用户函数别正确调用输入或者输出参数的书目。
+
+**usage,warning和error函数**
+
+Octave里，你可以通过函数打印出用法和错误信息给用户：usage和warning函数。它们的最简单的形式，就是他们打印出文字信息给用户，前缀为usage：和warning：。usage函数和warning函数的区别在于usage函数强制解析器退出函数在打印出用法信息之后。但是warning函数会继续运行，在信息打印出之后。
+
+我们可以检查minmax的输入蚕食为矩阵数组还是字符数组使用usage和warning函数来打印出合适的信息给用户：
+
+        代码示例 5.3
+
+        function [minx,maxx] = minmax(x)
+
+          [nr nc]=size(x)
+          if (nr>1 & nc>1)
+            warning("Input to minmax is a matrix array:\
+                    output will be vectors");
+          elseif (ischar(x))
+            usage("Input to minmax cannot be a character array")
+          endif
+
+          maxx=max(x);
+          minx=min(x);
+
+      endfunction
+
+第3行中，我们使用内置函数size来获取输入变量的行数和列数。如果二者都大于1，变量为矩阵数组。现在，既然函数对举证工作有效，我们仅仅提醒用户输出会是向量数组而不是标量。
+
+如果输入为字符数组，信息usage： input  cannot be a character array会输出（第8行）使用usage函数，函数停止运行。
+
+如果不用usage函数，使用error函数，会打印出错误信息，前缀为error：，然后会停止函数。代码示例5.3中第8行，比如，可以替换成：
+
+        error("Input to minmax cannot be a character");
+
+当函数中某处发生未知的错误时，经常会使用error函数，当检查用户输入参数时，经常使用usage函数。
+
+编写函数名称来打印信息是非常好的主意。你可以有一个脚本来调用许多函数，而其中只有一个失败了。如果你不在错误的信息中写出函数的名称，通过每个调用来寻找是很无趣的。
+
+**nargin和nargout**
+
+命令8中，minmax调用3个输入参数，导致了一个错误，报告第3个输出是未定义的。每当Octave函数被调用，变量nargin和nargout会自动生成函数的输入数目和输出数目。让我们看一个例子：
+
+        octave:9> function fun()
+        >print("Number of input : %d Number of outputs: %d \n",\ nargin, nargout")
+
+        octave:10> fun(2,3,4)
+
+        octave:11> [a b c]=fun()
+
+命令11中打印出错误信息，因为它不会被赋值给返回列表中的变量。将nargin想象成“Number of ARGuments IN”，而nargout想象成“Number of ARGuments OUt”.
+
+我们现在可以处理命令8中产生的错误了：
+
+    代码示例5.4
+    function [minx,]
+
+第6行，我们仅仅打印出用法信息，如果nargout大于2.通过这种方法，用户允许调用minmax函数，仅仅含1个或者没有输出参数，因此只获取向量数组的最大值和最小值。我们也可以检查第3行，如果输入参数的数目是否正确，在检查输入大小是否正确，类型是否正确之前。如果我们不这样做，调用minmax函数而不带任何参数，调用size函数是无效的。Octave会打印出一个通用的错误信息而不容易被追踪。
+
+通过这些改进，我们现在重新输入命令6-8：
+
+    octave:10> [mina max2]=minmax("Hello World")
+    octave:11> [mina,maxa]=minmax([1 2;3 4])
+    octave:12> [a b c]=minmax([1 2 3 4])
