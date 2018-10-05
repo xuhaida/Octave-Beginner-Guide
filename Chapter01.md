@@ -106,10 +106,10 @@ Octave主要被设计成运行于GNU/Linux环境下，但是读者也可以在Wi
 
 **实战时刻--从源代码运行Octave**
 
- 1. 从http://www.gnu.org下载最新的Octave版本并保存到任何目录下。该文件是一个压缩文件，使用.tar.gz作为压缩扩展名。
- 2. 打开终端，进入已下载源码文件目录。输入下面的命令解压缩文件：
+1. 从http://www.gnu.org下载最新的Octave版本并保存到任何目录下。该文件是一个压缩文件，使用.tar.gz作为压缩扩展名。
+2. 打开终端，进入已下载源码文件目录。输入下面的命令解压缩文件：
 
-        $ tar zxf octave-version.tar.gz
+    $ tar zxf octave-version.tar.gz
 
  3. 这里version指的是版本号。该命令会创建名为octave-version的目录。
 
