@@ -17,9 +17,9 @@
 
 简单地说，GNU Octave为一款成熟的数值分析多功能软件工具。GNU Octave提供了以下内容：
 
- 1. 可用于解决许多不同问题的大规模内置函数；
- 2. 用于扩展GNU Octave的完整编程语言；
- 3. 绘图工具；
+1. 可用于解决许多不同问题的大规模内置函数；
+1. 用于扩展GNU Octave的完整编程语言；
+1. 绘图工具；
 
 本书的介绍将会覆盖这些特性。
 
@@ -149,21 +149,21 @@ Octave主要被设计成运行于GNU/Linux环境下，但是读者也可以在Wi
 
 **实战练习-用peaks检查**
 
- 1. 读者可以输入octave进入交互环境或者在Windows中双击Octave图标。现在读者可以看到prompt：
+1. 读者可以输入octave进入交互环境或者在Windows中双击Octave图标。现在读者可以看到prompt：
 
-        octave:1>
+    octave:1>
 
- 2. 读者已经学过如何退出交互环境。只需要在Octave中输入exit或者按下Ctrl+D，但是我们现在不打算退出。
+2. 读者已经学过如何退出交互环境。只需要在Octave中输入exit或者按下Ctrl+D，但是我们现在不打算退出。
 
- 3. 在中，输入如下命令：
+3. 在中，输入如下命令：
 
-        octave:1> surf（peaks）
+    octave:1> surf（peaks）
 
- 4. 现在读者可以看到一个3维surface图，正如下图中左边的所示图片。如果不是的话，说明读者的安装没有成功，将你的鼠标箭头指向窗口，摁住鼠标往下拉，移动箭头。如果做图程序支持的话，图画会按照你指的方向转动。如果读者，可以通过。
+4. 现在读者可以看到一个3维surface图，正如下图中左边的所示图片。如果不是的话，说明读者的安装没有成功，将你的鼠标箭头指向窗口，摁住鼠标往下拉，移动箭头。如果做图程序支持的话，图画会按照你指的方向转动。如果读者，可以通过。
 
- 5. 让我们试一下截面图。输入下面命令：
+5. 让我们试一下截面图。输入下面命令：
 
-        octave:2> contour(peaks)
+    octave:2> contour(peaks)
 
  6. 出现的图会像右边的图一样？如果不是的话，可能是因为读者使用了3.2.4版本而安装了oct2mat软件包。尝试着输入：
 
@@ -198,24 +198,24 @@ $$
 
 让我们假定Octave主目录为C：\Documents and Settings\GNU Octave\。我们可以实际上从Octave中直接创建；因此，让我们继续。
 
- 1. 启动Octave，输入下面命令：
+1. 启动Octave，输入下面命令：
 
-        octave:1> cd C:
-        octave:2> cd "Documents and settings"
-        octave:3> mkdir "GNU Octave"
+    octave:1> cd C:
+    octave:2> cd "Documents and settings"
+    octave:3> mkdir "GNU Octave"
         ans= 1
 
- 2. 响应ans=1出现命令行之后，意味着目录已经成功创建。如果Octave返回令值，表明出现了一些错误，而且Octave也会打印出一条错误信息。除了通过Octave来创建目录以外，读者也可以在Windows管理器中创建。
+2. 响应ans=1出现命令行之后，意味着目录已经成功创建。如果Octave返回令值，表明出现了一些错误，而且Octave也会打印出一条错误信息。除了通过Octave来创建目录以外，读者也可以在Windows管理器中创建。
 
- 3. 我们还需要告诉解释器现在是在Octave主目录。我们可以在OCtave中这样做：
+3. 我们还需要告诉解释器现在是在Octave主目录。我们可以在OCtave中这样做：
 
-        Octave:4>  edit
+    octave:4>  edit
 
- 4. 现在读者可以看到一个编辑器弹出。在Windows下的默认编辑器是Notepad++。打开文件c:\octave-home\share\octave\ site\m\startup\octaverc，其中octave-home指的是Octave的安装路径，比如Octave\3.2.4_gcc-4.4.0。在该文件中的末尾加入下面这一行：setenv('HOME','C:\Document and Settings\GNU Octave\');cd ~/
+4. 现在读者可以看到一个编辑器弹出。在Windows下的默认编辑器是Notepad++。打开文件c:\octave-home\share\octave\ site\m\startup\octaverc，其中octave-home指的是Octave的安装路径，比如Octave\3.2.4_gcc-4.4.0。在该文件中的末尾加入下面这一行：setenv('HOME','C:\Document and Settings\GNU Octave\');cd ~/
 
     确认没有输入错误！
 
- 5. 保存文件，退出编辑器，重启Octave，一切大功告成。
+5. 保存文件，退出编辑器，重启Octave，一切大功告成。
 
 **刚才发生了什么？**
 
@@ -227,16 +227,16 @@ $$
 
 **是战时刻-编辑.octaverc文件**
 
- 1. 如果读者还没有启动Octave的话，现在启动Octave，然后打开默认编辑器：
+1. 如果读者还没有启动Octave的话，现在启动Octave，然后打开默认编辑器：
 
         octave: 1 > edit
 
- 2. 将下面的几行命令复制至文件里，将文件保存成.octaverc到Octave的主目录。如果是Windows的话，在用户目录下，GNU/Linux。或者，用读者自己最喜爱的编辑器来创建这个文件：
+2. 将下面的几行命令复制至文件里，将文件保存成.octaverc到Octave的主目录。如果是Windows的话，在用户目录下，GNU/Linux。或者，用读者自己最喜爱的编辑器来创建这个文件：
 
         PS（">>   ")
         edit mode "async"
 
-    退出编辑器，重启Octave。
+退出编辑器，重启Octave。
 
 **更多关于.octaverc的内容**
 
@@ -332,13 +332,13 @@ $$
 
 有些软件包即使没有明确载入，也会自动载入。读者这时候可以用-noauto来强制软件包不予载入。
 
-        octave:3> pkg installl -noauto msh-vestion-number.tar.gz
+    octave:3> pkg installl -noauto msh-vestion-number.tar.gz
 
 **卸载软件包**
 
 卸载软件包非常容易：
 
-        octave:8> pkg uninstall msh
+    octave:8> pkg uninstall msh
 
 注意读者会得到一个错误信息如果试着在卸载msh之前卸载splines，因为msh依赖splines。
 
@@ -346,6 +346,6 @@ $$
 
 pkg命令非常灵活，可以和很多选项一起调用。读者可以输入下面的命令来获取所有的选项。
 
-        octave:9> help pkg
+    octave:9> help pkg
 
 pkg的帮助文档非常长。
