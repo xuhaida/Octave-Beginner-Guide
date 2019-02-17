@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Chapter02.html</title>
+
+</head>
+
+<body>
+
+[WARNING] Could not convert TeX math '
+  b=
+      \begin{bmatrix}
+        1 & 2 & 3
+      \end{bmatrix}
+  ', rendering as TeX
+[WARNING] Could not convert TeX math 'A=
+          \begin{bmatrix}
+          1 & 2 & 3 \\
+          4 & 5 & 6
+          \end{bmatrix}
+  ', rendering as TeX
+[WARNING] Could not convert TeX math 'A=
+  \begin{bmatrix}
+  1 & 2 \\
+  3 & 4
+  \end{bmatrix}
+  ', rendering as TeX
+[WARNING] Could not convert TeX math 'B=
+  \begin{bmatrix}
+  1 & 2 & 3\\
+  4 & 5 & 6
+  \end{bmatrix}
+  ', rendering as TeX
+[WARNING] Could not convert TeX math '
+  \left\{
+  \begin{array}{c}
+  2x_1+ x_2-x_3=1 \\
+  4x_1+ 2x_2-2x_3=1 \\
+  -x_1+x_2/2-x_3/2=1.5
+  \end{array}
+  \right.
+  ', rendering as TeX
+[WARNING] Could not convert TeX math 'A=
+  \begin{bmatrix}
+  2 & 1 & -3\\
+  4 & 2 & -2\\
+  -1 & 1/2  & -1/2
+  \end{bmatrix}
+  ', rendering as TeX
+<p>Octave被设计成对向量和矩阵工作。在这章中，你会学会如何初始化对象（或者变量），如何对它们进行比较操作，如何执行简单的算法运算。Octave也支持更多高级的变量类型,即结构体和元胞数组,接下来你就会学到。通过Octave，你会拥有一个多功能工具库，让你获取变量的信息。这些工具是对后面要学习的内容很重要的，我们会学习其中一些重要的工具。</p>
+<p>具体地说，我们学会下面的内容：</p>
+<ul>
+<li>初始化简单的数值型变量，比如标量，向量和矩阵；</li>
+<li>初始化文本字符变量；</li>
+<li>初始化复数变量；</li>
+<li>初始化结构体，元胞和多维数组；</li>
+<li>获取变量信息；</li>
+<li>数值变量加减运算；</li>
+<li>执行矩阵乘法；</li>
+<li>求解线性方程系统；</li>
+<li>对变量；</li>
+</ul>
+<h2 id="简单的数值变量">简单的数值变量</h2>
+<p>在后面，我们会看到如何初始化简单的变量。通过简单的变量，我们意思是表来标量，向量和矩阵。首先，标量变量具有名称，变量a通过命令赋值为1：</p>
+<pre><code>octave:1&gt; a=1;</code></pre>
+<p>即你命名变量名称，本来中为a，然后你使用等号来将一个值来赋值给变量。注意，Octave种，变量不用指点个类型来初始化，正如C和其他底层语言。Octave将数字解释成实数，除非你显示地告诉它。</p>
+<p>你可以显示变量的值，简单地输入变量名：</p>
+<pre><code>octave:2&gt; a</code></pre>
+<p>让我们向前走，初始化数值数组：</p>
+<pre><code>octave:3&gt; b= [1 2 3]</code></pre>
+<p>Octave解释成行向量：</p>
+<p><br /><span class="math display">$$
+b=
+    \begin{bmatrix}
+      1 &amp; 2 &amp; 3
+    \end{bmatrix}
+$$</span><br /></p>
+<p>而不是简单的一维数组，强制元素可以用逗号分开，因此前面命令也可以是，初始化列向量：</p>
+<pre><code>    octave:3&gt; b=[1,2,3]</code></pre>
+<p>你可以使用：</p>
+<pre><code>    octave:4&gt; c=[1;2;3]</code></pre>
+<p>注意，每个元素用分号分开。</p>
+<p>现在我们往前走，初始化一个矩阵2行3列:</p>
+<p><br /><span class="math display">$$A=
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        4 &amp; 5 &amp; 6
+        \end{bmatrix}
+$$</span><br /></p>
+<p>使用下面的命令:</p>
+<pre><code>    octave:5&gt; A=[1 2 3;4 5 6]</code></pre>
+<p>注意，我使用大写字母来命名矩阵，使用小写字母来命名标量和向量。当然，这只是个人的爱好。Octave在这个方面没有强制规定。重要的是，Octave里大写字母和小写字母是敏感的。如果我们在命令5种小写字母，Octave会覆盖已有的变量名。每当我们对一个已经存在的变量名重新命名时，旧的赋值不再可以进入，因此重新赋值时要非常小心。</p>
+<p>本书里我们将会使用更多通用的数组来指定向量或者矩阵变量。</p>
+<p><strong>读取和改变数组成员</strong></p>
+<p>进入 行向量b中的第2个元素，我们使用括号：</p>
+<pre><code>    octave:6&gt; b(2)
+    ans = 2</code></pre>
+<p>也就是，数组索引从1开始，我们看到ans的反应。但是没有做出解释。这是“答案（answer）”的缩写，是具有值的变量。上面例子中的值为2。</p>
+<p>对于矩阵变量A，我使用，比如说：</p>
+<pre><code>    octave:7&gt; A(2,3)
+    ans= 6</code></pre>
+<p>想进入第2行第3列的元素。我们也可以用冒号来读取整行和整列数据。</p>
+<pre><code>    octave:8&gt; A(:,2)
+    ans =
+      2
+      5
+    octave:9&gt; A(1,:)</code></pre>
+<p>现在我们知道如何读取向量和矩阵中的元素。我们也可以改变这些元素的值，尝试将元素A（2，3）设定为-10.1：</p>
+<pre><code>    octave:10&gt; A(2,3)=-10.1
+
+    A=
+      1.0000   2.0000 3.0000
+      4.0000   5.0000 -10.1000</code></pre>
+<p>因为A中的一个元素为非整数数值，现在所有元素按照浮点格式显示，显示的数字位数依赖于默认的设置。但是，对于Octave解释器没有不同，总是使用双精度，除非你明确要求使用不同精度。</p>
+<p>也可以通过整行通过分号操作符来改变整行的元素。要提换掉矩阵A中整个第2行，我们使用：</p>
+<pre><code>    octave:11&gt; A(2,:)= b</code></pre>
+<p>这种替换是有效的，因为向量b与A中的行元素数目相同哦，让我们故意将事情弄乱，将A种的第2列用向量b来替换：</p>
+<pre><code>    octave:12&gt; A(:,2)= b</code></pre>
+<p>这里，Octave打印出错误信息告诉我们说，维数不匹配，因为我们想用3个元素来替换掉数值中的2个元素，并且b是一个3个元素的向量，我们不能用行来换列。</p>
+<p>这里有一个例外的情况，你可以用标量来替换掉一整列或者一整行的数据。</p>
+<pre><code>    octave:13&gt; A(:,2)= 42</code></pre>
+<p><strong>更多例子</strong></p>
+<p>除此之外，删除元素，整列和整行，扩展函数</p>
+<p><strong>实战时刻-数组操作</strong></p>
+<ol type="1">
+<li><p>删除矩阵A的第2列，我们使用：</p>
+<pre><code> octave:14&gt; A(:,2)= []</code></pre></li>
+<li><p>我们可以延长现有的数组，比如：</p>
+<pre><code> octave:15&gt; b=[b 4 5]</code></pre></li>
+<li><p>最后，试一下下面的命令：</p>
+<pre><code> octave:16&gt; d=[2 4 6 8 10 12 14 16 18 20]
+ d =
+     2    4    6    8   10   12   14   16   18   20
+ octave:17&gt; d(1:2:9)
+ ans =
+     2    6   10   14   18
+ octave:18&gt; d(3:3:12)= -1
+ d =
+     2    4   -1    8   10   -1   14   16   -1   20    0   -1</code></pre></li>
+</ol>
+<p><strong>刚刚发生了什么</strong></p>
+<p>命令14中，Octave将[]解析成为空的列向量，A中第2列在命令中被删除。不是删除，我们删除一列。</p>
+<pre><code>    octave:14&gt; A(2,:) = []</code></pre>
+<p>命令15中，等号右边，我们通过[b 4 5]构建了一个新向量，即如果我们写出b，我们会得到[1 2 3 4 5]。既然b=[1 2 3]。因为等号，我们将该向量赋值给b，而删除了已经存在的b值。当然，我们不能扩展b，使用b=[b;4;5]。既然通过增加一个行向量的列向量。</p>
+<p>命令16，我们初始化一个行向量7。命令17，我通过使用元素索引1，3，5，7和9.即命令18需要，d为含10个元素的行向量，但是这里，Octave自己延长向量，将加入的元素设置成0。如果你指定数值。命令18里，我们只能将Octave设定元素12为-1，元素11因此被设定为默认值0，从输出可以看到，在底层编程语言，或未分配的数组会导致系统崩溃。</p>
+<p><strong>复数变量</strong></p>
+<p>Octave也支持复数计算，正如你看到的，复数可以写成z=a+bi,a为实数部分，b为虚数部分，i为虚数单位，即定义<span class="math inline"><em>i</em><sup>2</sup> =  − 1</span>。</p>
+<p>初始化复数变量，比如说z=1+2i,你可以输入：</p>
+<pre><code>    octave:19&gt; z= 1+ 2I</code></pre>
+<p>Octave开启时，变量i，j，I和J都是虚数单位，都可以使用。我倾向于用I来表示虚数单位，因为i和j经常被用来作为循环中的变量，而I不像i常用。</p>
+<p>为读取复数的实数和虚数部分，你使用：</p>
+<pre><code>    octave:20&gt; real(s)
+    ans=1
+    octave:21&gt; imag(s)
+    ans=2</code></pre>
+<p>你也可以初始化复数向量和复数矩阵，比如：</p>
+<pre><code>    octave:22&gt; Z=[1 -2.3I;4I 5+6.7I]
+    Z=
+      1.0000+0.0000i   0.0000-2.3000i
+      0.0000+4.0000i   5.0000+6.7000i</code></pre>
+<p>注意！如果数组元素中有非零实数和虚数部分，在两部分之间必需留有空白。比如，命令22里我们使用Z=[1 -2.3I;4I 5 + 6.7I]最后的元素会被解析成两部分（5和6.7I)。这将导致维数不匹配的错误。</p>
+<p>复数数组中的元素可以通过实数数组同样的方法读取。你可以使用real(Z)和imag(Z)来打印复数数组Z中实数和虚数的部分。</p>
+<p><strong>文本变量</strong></p>
+<p>尽管Octave主要是计算工具，你也可以处理文本变量。后面的章节里，你会看到为什么这是非常方便的。字母（或者字符），单词，句子，段落，等待，都可以命名为文本字符串。</p>
+<p>初始化文本字符，你可以：</p>
+<pre><code>    octave:23&gt;t=&quot;Hello&quot;
+    t=Hello</code></pre>
+<p>除了双引号，你也可以使用单引号。我倾向于字符中使用双引号。因为与大部分其他编程语言遵循的语法一致，与我们在本章节后面后面学到的转置运算符通常不一致。</p>
+<p>你可以将文本字符视为字符数组，就像向量为数值型数组一样。要读取文本中的字符，你可以简单地写下:</p>
+<pre><code>    octave:24&gt; t(2)
+    ans=e
+    octave:25&gt; t(2:4)
+    ans=ell</code></pre>
+<p>就像我们对待数值数组一样。我们也可以扩展现有的文本（注意双引号后面的第一个字符空白字符）</p>
+<pre><code>    octave:26 t=[t &quot; World&quot;]
+    t= Hello World</code></pre>
+<p>你也可以如下所示使用文本元素初始化一个变量：</p>
+<pre><code>    octave:27&gt; T= [&quot;Hello&quot;;&quot;George&quot;]
+    T=
+      Hello
+      George</code></pre>
+<p>字符串变量T的表现很像字符矩阵（二维数组）。现在你可以像读取数值矩阵元素一样读取字符：</p>
+<pre><code>    octave:28&gt; T(2,1)
+    ans=G</code></pre>
+<p>但是等等。字符“hello”中的字符数为5，而字符”George”有6个字符。Octave不是应当发出警告来投诉字符数不一致吗？答案是否定的。两个字符串长度不一致的情形下，Octave只是简单地将空白字符加至字符串后面。在上面的例子中，字符串“Hello”被转变成“Hello”。强调一下，这只对字符串有效。</p>
+<p>命令：</p>
+<pre><code>    octave:29&gt;A=[1 2; 3 4 5]
+    error: number of columns must match (3 !=2)</code></pre>
+<p>导致一个错误，清除地表明问题所在。</p>
+<p><strong>高维数组</strong></p>
+<p>Octave也支持高维数组。这些也可以像其他数组一样初始化，比如：</p>
+<pre><code>    octave:30&gt; B(2,2,2)=1
+    B=
+    ans(:,:,1)=
+      0     0
+      0     0
+    ans(:,:,2)=
+      0     0
+      0     1</code></pre>
+<p>上面的命令初始化一个3维数组B,大小为2x2x2，即，<span class="math inline">2<sup>3</sup> = 8</span>个元素，将元素B（2，2，2）赋值为1。回想一下，Octave会将所有未指定的元素赋值为0。Octave显示3维数组成2个2维数组。我们现在可以读取所有单个元素和将我们想要的值赋给它们：</p>
+<pre><code>    octave:31&gt; B(1,2,1)=42
+    B=
+      ans(:,:,1)=
+        0     42
+        0     0
+      ans(:,:,2)=
+        0     0
+        0     1</code></pre>
+<p><strong>测试-使用数组工作</strong></p>
+<ol type="1">
+<li>下面哪些变量初始化是无效的：</li>
+</ol>
+<p><strong>结构体和元胞数组</strong></p>
+<p>许多真实应用中。我们必须处理许多不同类型变量的对象。比如，我们希望描述弹射体的运动，预先知道质量（标量），瞬时速度（向量），类型（字符串）等等是有用的。Octave里，你可以初始化一个变量，包含了所有这些信息。这些变量被称为结构体和元胞数组。</p>
+<p><strong>结构体</strong></p>
+<p>Octave中的结构体与C相似，拥有名称，比如弹射体，和一系列成员，拥有名称，正如下面图形所示：</p>
+<p>我们可以指向单个结构成员使用.字符：</p>
+<pre><code>    structurename.fieldname</code></pre>
+<p>这里structurename为结构体变量的名称，fieldname为成员名称。</p>
+<p>这里我们展示了结构体的例子，我们使用上面描述的弹射体。让我们命名一个结构体变量projectile，将成员名称设定为mass，elocity和type。你当然也可以选择其他的名称。</p>
+<p><strong>实战时刻–初始化结构体</strong></p>
+<ol type="1">
+<li><p>设定弹射体的重量，我们使用</p>
+<pre><code> octave:32&gt; projectile.mass= 10.1
+ projectile=
+ {
+   mass=10.100
+ }</code></pre></li>
+<li><p>以类似方式设定速率：</p>
+<pre><code> octave:33&gt; projectile.velocity= [1 0 0]</code></pre></li>
+<li><p>我们也用同样的方法设定文本：</p>
+<pre><code> octave:34&gt; projectile.type=&quot;Cannonball&quot;</code></pre></li>
+</ol>
+<p>还有位置，还有其他相关的。</p>
+<h2 id="刚刚发生了什么">刚刚发生了什么</h2>
+<p>命令32初始化了一个结构体变量projectile，命名了mass的成员变量，值为10.100.这时，结构体变量还只是拥有一个成员。</p>
+<p>命令33和34，我们然后增加了两个成员至结构体变量，分别命名为elocity和type，当然，还可以增加更多的成员至结构体变量中。</p>
+<p>除了一次输入一个结构体成员外，你也可以使用struct函数。（下一章里，我们会学习Octave中的函数实际是什么）：</p>
+<pre><code>    octave:35&gt; projectile=struct(&quot;mass&quot;,10.1,&quot;velocity&quot;,[1 0 0],&quot;type&quot;,&quot;Cannonball&quot;);</code></pre>
+<p>struct函数的输入（也被称为参数）是一个结构体成员接着它的值，一个结构体成员接着它的值等待。实际上，说到结构体第1个成员，第2个成员是没有意义的，你可以改变struct函数输入参数的顺序而不会有不好的影响。</p>
+<p>你注意到了吗，在命令的最后使用了分号来阻止反应（输出）？</p>
+<p><strong>读取结构体成员</strong></p>
+<p>你可以读取和改变结构体体种的各个成员，比如：</p>
+<pre><code>    octave:36&gt; projectile.velocity(2)=-0.1</code></pre>
+<p>当你有很多的，拥有弹射体结构体数组是很实用的。初始化2个这样的弹射体结构体，你简单地将整个弹射体结构体复制至每个数组成员里：</p>
+<pre><code>    octave:37&gt; s(1)=projectile;
+    octave:38&gt; s(2)=projectile;</code></pre>
+<p>注意，使用等号将结构体复制，你就可以不用将成员逐个复制了。读取结构体种的成员，你可以：</p>
+<pre><code>    octave:39&gt; s(2).type
+    ans=Cannonball</code></pre>
+<p>octave有2个函数，一个用来设定结构体成员，一个用来读取它们。这些函数分别为setfield和getfield：</p>
+<pre><code>    octave:40&gt; s(2)=setfield(s(2),&quot;type&quot;,&quot;Cartridge&quot;);
+    octave:41&gt; getfield(s(2),&quot;type&quot;)
+    ans=Cartridge</code></pre>
+<p>你必须从setfield将输出值结构体。为什么会这样将会在第5章里加以解释。上面例子只是显示了如何初始化一个一维结构体数组，但是你愿意的话，你也可以处理多维数组。</p>
+<p>你可以初始化套嵌结构体，即它的一个或者多个成员可以也是结构体。让我们通过基本的弹射体结构体哦来加以说明：</p>
+<pre><code>   octave:42&gt; projectiles=struct(&quot;type1&quot;,s(1),&quot;type2&quot;, s(2));
+   octave:43&gt; projectiles.type1.type1
+   ans=Cartridge</code></pre>
+<p>这里projectiles含有两个成员，分别为type1和type2。他们都是一个结构体，分别为s（1）和s（2）。</p>
+<p>正如你可以想象地到的，扩展后的结构体的复杂性和多样性可以变得非常巨大，我们就到这里为止了。</p>
+<p><strong>元胞数组</strong></p>
+<p>Octave里，你可以处理元胞数组。元胞数组是指一个数据容器样的结构，可以同时含有数值和文本变量，但是与结构体不一样，它不含有成员。元胞数组里的每个格子（或者元素）可以是标量，向量，文本等等。我喜欢将元胞数组想象成一个格子数组，就像电子表格那样，如下所示；</p>
+<p><strong>实战时刻–初始化元胞数组</strong></p>
+<ol type="1">
+<li><p>使用projectile结构体初始化一个元胞数组，我们可以使用：</p>
+<pre><code> octave:44&gt; projectile={10.1,[1 0 0],&quot;Cannonball&quot;}</code></pre></li>
+</ol>
+<p>方括号里的数字为行索引和列数索引。</p>
+<ol start="2" type="1">
+<li><p>读取一个单元，你必须使用大括号：</p>
+<pre><code> octave:45&gt; projectile{2}</code></pre></li>
+<li><p>你也可以使用二维元胞数组。比如：</p>
+<pre><code> octave:46&gt; projectiles={10,1,[1 0 0],&quot;Cannonball&quot;;1.0,[0 0 0],&quot;Cartridge&quot;}</code></pre></li>
+<li><p>要读取储存于元胞数组里的值，简单地使用：</p>
+<pre><code> octave:47&gt; projectiles{2,3}
+ ans=Cartridge</code></pre></li>
+</ol>
+<p><strong>刚刚发生了什么</strong></p>
+<p>命令44使用1行3列的数据初始化了一个元胞数组。第1个单元里包含了重量，第2个单元里为速率，第3个单元为文本“Cannonball”，与我们上面讨论的结构体类似。注意，数组单元包含了不同的变量类型，元胞数组因此与通常的数组是不同的。</p>
+<p>要读取单元里的数值，你可以使用大括号，而不是通常的括号，正如命令45中显示的。</p>
+<p>你也可以处理二维元胞数组。命令46和47显示了一个例子。注意，插入一个更多的行至元胞数组，你需要像数值数组一样使用冒号。</p>
+<p><strong>向前–处理结构体</strong></p>
+<p>初始化变量名train，包含有下面的成员名称和值：</p>
+<p>使用setfield函数来改变重量为90.0.将第2个元素wagon_index_array为23。</p>
+<p><strong>获取信息</strong></p>
+<p>在本节列，我们学会了如何得到已经初始化后变量的信息，这个特别有用，当你忘记了名称，大小，当你从文件中载入数据是（第4章里有更加详细的说明）。</p>
+<p><strong>实战时刻–使用whos</strong></p>
+<p>我们处理了许多变量，我们可以用whos将他们列出：</p>
+<pre><code>    octave:48&gt; whos</code></pre>
+<p><strong>刚刚发生了什么</strong></p>
+<p>正如上面看到的，whos打印出了5列。第1列可以有值g或者p，表示变量是全局变量还是持续变量。我们会在第5章里对这两个修饰符进行说明。在我们的例子中，所有的变量为局部变量，whos不能显性表示。局部变量的特征是只在给定工作区里可见和可读。在上面的例子里，我们只有一个工作区：最顶层工作区，在这个工作区里，所有变量都可以读取。实际，我们可以说，命令种的局部变量都在顶层工作区里定义的。</p>
+<p>第2列只是简单地列出了变量名称。变量的大小在第3列中给出来：行数乘以列数。比如，标量变量a（命令1）的大小为1x1，意思是它只有1行和1列。projectile元胞数组有1行和3列，正如我们从命令44中知道的。</p>
+<p>第4列显示标量变量a占用8个字节的内存，为双精度类。实际上，类为双精度意味着Octave使用双精度来表示变量，正如我们前面提到的。回想一下命令26，变量t为文本“Hello World”。这个文本由11个字符组成，其中包含空白字符，从上面的输出中我们可以看到。这与C语言不同，文本的结束用‘\0’来表示，为字符数组的一部分。</p>
+<p>变量s为结构体的二维数组（命令37-41），变量projectiles为元胞数组，使用通用基本“建造材料”，作为结构体数组s。从表中，我们观察到它占用了通用的内存，因此，我们没有使用其中每种方式都没有节省内存。顺便问一下，结构体数组s占用的字节数是否与成员字节数总和相同。</p>
+<p>在表后面，我们可以看到我们总共用了648个字节的内存。</p>
+<p>你也可以调用whos带一个参数，比如，whos（”A“），如果你只是希望获取A的有关信息。同样，whos有一个小兄弟命令who。who会列出局部变量，但是不会列出其他变量的信息。</p>
+<p><strong>大小，行数，列数，和长度</strong></p>
+<p>与其列出变量的所有信息，你可以得到它的行数和列数的信息。我们会在书中频繁使用。A的大小如下获取：</p>
+<pre><code>    octave:49&gt; size(A)
+    ans=
+      2  2</code></pre>
+<p>因为A为2x2矩阵。通常情况下，size函数会返回行数和列数。如果你喜欢，你可以单独地获取这些信息：</p>
+<pre><code>    octave:50&gt; rows(A)
+    ans=2
+    octave:51&gt; columns(A)
+    ans=2</code></pre>
+<p>这里发生了什么非常易于理解。</p>
+<p>Octave中，你可以读取变量的长度。我们需要理解这个准确的意思。如果变量为向量或者文本，长度为数组中的成员数目。如果变量为高维度数组，长度定义为任意维度上成员的最大数。让我们看2个例子：</p>
+<pre><code>    octave:52&gt; length(c)
+    ans=3
+    octave:53&gt; length(T)
+    ans=6</code></pre>
+<p>命令53中的输出为文本数组中的列数。返回列数而不是行数，是因为变量T具有6列，但是只有2行。</p>
+<p><strong>确认变量类型</strong></p>
+<p>Octave会告诉你变量被解析成一个向量，矩阵，文本，复数，元胞数组等等。我们检查一下Octave实际上是否判定变量a为标量：</p>
+<pre><code>    octave:54&gt; isscalar(a)
+    ans=1</code></pre>
+<p>Octave返回1，意思为真（或者yes）。那行向量b呢？</p>
+<pre><code>    octave:55&gt; isvector(b)
+    ans=1
+    octave:56&gt; ismatrix(b)
+    ans= 1</code></pre>
+<p>这里有点奇怪！命令55中，Octave将b视为一个（行）向量。但是为什么又将b视为一个矩阵呢？矩阵只是元素的数组（组织数字的一种方法）。因此，b可以视为一个1行3列的矩阵。命令ismatrix（a）又会返回什么值呢？尝试一下！</p>
+<p>除了使用istype，你也可以使用typeinfo。比如，命令56中，我们可以使用：</p>
+<pre><code>    octave:57&gt; typeinfo(b)
+    ans= matrix</code></pre>
+<p><strong>从工作区中删除变量</strong></p>
+<p>你可以使用命令clear来删除变量。比如，如果你希望删除变量A：</p>
+<pre><code>    octave:58&gt; clear A</code></pre>
+<p>你也可以使用通用符*，比如，来删除变量projectile和projectiltes，以及其他所有以p开头的变量，你可以使用：</p>
+<pre><code>    octave:59&gt; clear p*</code></pre>
+<p>如果你不指定任何变量，命令clear会删除所有的变量，所以使用该命令时需要小心，因为如果你将它们从内存删除后，你就无法来重新获取这些变量（除非你已经将他们保存与其他地方）。尝试使用whos（或者who）来看一下变量是否被命令58和59删除。</p>
+<p><strong>一些技巧</strong></p>
+<p>想象一下，你希望产生一系列在区间-2.1到0.5（包括-2.1到0.5）的数字，步长为增加0.2。手写是相当无聊的，也非常容易出错。因为这个会涉及输入大量数字。幸运的是，Octave为你提供了非常方便的方式来实现（注意，我们为变量b重新赋值）：</p>
+<pre><code>    octave:60&gt; b=[-2.1:0.2:0.5]</code></pre>
+<p>如果我们用手写方式进行，我们输入：</p>
+<pre><code>    octave:61&gt; size(b)
+    ans=
+      1   14</code></pre>
+<p>14个数字。你也可以使用负数，如果区间的起始值比终止值大。如果你不提供步进参数，Octave默认为1。</p>
+<p>重要的一点是，如果我们没有选择一个步进值，比如0.4，在命令60中，Octave会给于我们从-2.1开始的一系列数值，但是终止于0.4。</p>
+<p>经常性的，你会发现你自己需要产生一系列的数值，但是不知道步进。你当然也可以计算步进值。但是Octave具有一个功能来完成这个任务。让我们生成一系列7个数值，区间为上面相同（即，-2.1到0.5）：</p>
+<pre><code>    octave:62&gt; b=linspace(-2.1,0.5,7)</code></pre>
+<p>Octave会计算需要的步进值，但是也会保证两边的数值会被包含在里面。</p>
+<p>正如我们会在后面看到的，函数ones和zeros在一下情形下是非常有用的，你希望产生一个数组，包含特定值的元素。比如，创建所有值为1的2x3矩阵：</p>
+<pre><code>    octave:63&gt; ones(2,3)</code></pre>
+<p>因此，创建一个所有元素为0的数组（这里是行向量）：</p>
+<pre><code>    octave:64&gt; zeros(1,4)</code></pre>
+<p>ones和zeros也可以用于高维数组。</p>
+<p>你也可以使用eye来创建一个对角矩阵：</p>
+<pre><code>    octave:65&gt; eye(4)</code></pre>
+<p>注意，命令65中，我们不需要指定行数和列数，因为对角矩阵只是在方阵中定义。</p>
+<p>** 基本数学运算**</p>
+<p>Octave提供了简单的方法执行许多数学运算，包括了简单的加法，乘法到求解复杂的线性方程。在本节中，我们会遍览大部分基本的数学运算，比如加法，减法，乘法，左除和右除。通常，我们会在线性代数的框架下来讨论这些运算，而不是使用于简单的标量数据。</p>
+<p><strong>加法和减法</strong></p>
+<p>我们来开始加法。</p>
+<p><strong>实战时刻–加法和减法操作</strong></p>
+<ol type="1">
+<li><p>我们丢失了所有的变量！让我们重新开始，清除所有变量：</p>
+<pre><code> octave:66&gt; clear</code></pre></li>
+<li><p>现在，我们在单行命令中定义4个变量（！）：</p>
+<pre><code> octave:67&gt; a=2;b=[1 2 3];c=[1;2;3];A=[1 2 3; 4 5 6];</code></pre></li>
+<li><p>让我们投入其中，试着进行不同的变量进行加法。这些都使用+字符：</p>
+<pre><code> octave:68&gt; a+a
+ octave:69&gt; a+b
+ octave:70&gt; b+b
+ octave:71&gt; b+c</code></pre></li>
+</ol>
+<p><strong>刚刚发生了什么</strong></p>
+<p>命令68的输出非常清楚，我们对标量a和自己相加。命令69中，我们看到+运算符仅仅是将标量a加至b行向量的每个元素中。这被成为element-wise相加。如果我们将标量加至一个矩阵或者高维数组也同样有效。</p>
+<p>现在，如果+应用于2个向量，当且当两个向量的大小相同时，会相加，这也是我们在基本线性代数中看到的一样。</p>
+<p>命令70和71，我们看到b+b是有效的，但是b+c就不是，因为b为行向量，而c为列向量，他们大小不一致，即他们的列数和行数不同。在最后的例子中，Octave会对陈述的问题产生一个错误信息。我们试着对b和A相加也会出现同样的问题：</p>
+<pre><code>    octave:72&gt; b+A</code></pre>
+<p>从上面的例子中，我们看到将标量加至向量或者矩阵是特殊的例子。这十倍允许的，即使维度不同！当我们对向量或者举证相加或者相减时，大小必须是相同的。毋庸置疑，减法使用-运算符。这里适用同样的规则，比如：</p>
+<pre><code>    octave:73&gt; b-b
+
+    octave:74&gt; b-c</code></pre>
+<p><strong>矩阵乘法</strong></p>
+<p>操作符被用于矩阵乘法。回想一下线性方程，我们不能对所有的两个矩阵做乘法运算。并且，矩阵乘法是不可交换的。比如，考虑一下两个矩阵：</p>
+<p><br /><span class="math display">$$A=
+\begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{bmatrix}
+$$</span><br /> 和 <br /><span class="math display">$$B=
+\begin{bmatrix}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6
+\end{bmatrix}
+$$</span><br /></p>
+<p>矩阵乘法AB是良好定义的，但是BA就不是。如何A是n x k，而B 的大小为k x m，矩阵乘法AB会生成n xm大小的矩阵。从这里，我们知道了，“左边”矩阵的列数必须与”右边”矩阵的行数相同。我们可以将这个想象成（n x k）（k x m）= n xm。在上面的例子里，矩阵相乘生成了2x3矩阵：</p>
+<p><strong>实战时刻–执行乘法操作</strong></p>
+<p>让我们尝试执行一些同样的乘法操作，正如我们前面的加法一样：</p>
+<pre><code>    octave:75&gt; a*a
+
+    octave:76&gt; a*b
+
+    octave:77&gt; b*b</code></pre>
+<p><strong>刚刚发生了什么</strong></p>
+<p>命令75中，我们看到*将两个标量变量进行相乘，就像标准的乘法。与线性方程一致，我们也可以将标量与向量中的每个元素相乘，正如命令76的输出一样。命令77产生了一个错误信息。思考一下，b为行向量，Octave解析成1x3矩阵，因此我们尝试执行矩阵乘法（1 x 3)(1 x 3)是无效的。命令78，另一方面，（1 x 3)(3 x 1)，因为c为列向量，产生了1 x 1大小的矩阵，即标量。这当然是b和c的点乘结果。</p>
+<p>让我们尝试更多一个例子，执行矩阵乘法于A和B 。首先，我们需要初始化两个矩阵，让后让我们对它们相乘：</p>
+<pre><code>    octave:79&gt; A=[1 2; 3 4];B=[1 2 3;4 5 6];
+    octave:80&gt; A*B
+    octave:81&gt; B*A</code></pre>
+<p>看起来，Octave懂得线性代数！</p>
+<p><strong>转置操作</strong></p>
+<p>如果两个矩阵是同样大小的，Octave提供了一个方便的方法对成员进行相乘。比如，矩阵B:</p>
+<pre><code>    octave:82&gt; B.*****</code></pre>
+<p>注意，点后在乘法操作符之前。点后也用于链接其他操作。比如：</p>
+<pre><code>    octave:83&gt; B.+B</code></pre>
+<p>结果与命令B+B一样。</p>
+<p>如果我们希望所有元素的2.1幂，我们使用.^操作符：</p>
+<pre><code>    octave:84&gt; B.^2.1</code></pre>
+<p>你也可以执行2个矩阵的操作（如果它们大小一样的话）：</p>
+<pre><code>    octave:85&gt; B.^B</code></pre>
+<p>转置一个向量或者矩阵使用’操作符，为转置矩阵B,我们只需要：</p>
+<pre><code>    octave:86&gt; B&#39;</code></pre>
+<p>严格来说，’操作符是复数的共轭转置操作符。我们可以在下面的例子里看到：</p>
+<pre><code>    octave:87&gt; B=[1 2;3 4]+ I.eye(2)
+
+    octave:88&gt; B&#39;</code></pre>
+<p>命令87中，我们使用.*操作符来对所有eye(2)产生的对角矩阵与虚数单位相乘。最后，注意transpose（B）与.’会转置矩阵，但是不是服饰共轭元素。</p>
+<p><strong>结构体和元胞数组操作</strong></p>
+<p>机构体成员或者元胞数组成员的数学运算是直接了当的。首先，让我们看一下一个结构体成员操作的例子：</p>
+<pre><code>    octave:89&gt; s=struct(&quot;A&quot;,[1 2;3 4],&quot;x&quot;,[1;2]);
+    octave:90&gt; s.A*s.x</code></pre>
+<p>对应的元胞数组操作：</p>
+<pre><code>    octave:91&gt; c={[1 2;3 4],[1;2]};
+    octave:92&gt; c{1} * c{2}</code></pre>
+<p>整个结构体和元胞数组的数组操作在Octave中没有定义。</p>
+<p><strong>求解线性方程系统：左除和右除</strong></p>
+<p>你可能会很奇诡，为什么上面没有除法。我么知道两个标量如何相处，但是在线性代数的环境下讨论除非是没有意义的。并且，Octave定义了两个除法操作符，左除和右除，这些需要做一些更详细的解释。通过一个特别的例子讨论可能是最容易理解的。考虑一下线性方程系统：</p>
+<p><br /><span class="math display">$$
+\left\{
+\begin{array}{c}
+2x_1+ x_2-x_3=1 \\
+4x_1+ 2x_2-2x_3=1 \\
+-x_1+x_2/2-x_3/2=1.5
+\end{array}
+\right.
+$$</span><br /></p>
+<p>我们使用矩阵标记来表示： <br /><span class="math display"><em>A</em><em>x</em> = <em>y</em>,</span><br /></p>
+<p>其中：</p>
+<p><br /><span class="math display">$$A=
+\begin{bmatrix}
+2 &amp; 1 &amp; -3\\
+4 &amp; 2 &amp; -2\\
+-1 &amp; 1/2  &amp; -1/2
+\end{bmatrix}
+$$</span><br /></p>
+<p>如果系数矩阵A是可逆的（实际上也是），我们就可以通告在两边乘以A的逆，即、<span class="math inline"><em>A</em><sup>−</sup>1</span>,既可以求解这个线性方程。</p>
+<p><br /><span class="math display"><em>x</em> = <em>A</em><sup> − 1</sup><em>y</em></span><br /></p>
+<p>Octave里，命令A<span class="math inline"><em>A</em><sup> − 1</sup><em>y</em></span>一样。注意是反斜号，这被称为左除，你也可以猜猜为什么？</p>
+<p>右除的命令A/y，相当于<span class="math inline"><em>y</em><em>A</em><sup> − 1</sup></span>，当然，这里并没有加以定义，因为向量y的大小为3x1，而A的大小为3x3。也就是说，矩阵乘法没有办法执行。</p>
+<p><strong>实战时刻–运行左除和右除</strong></p>
+<ol type="1">
+<li><p>我们需要初始化系数矩阵A和向量y：</p>
+<pre><code> octave:93&gt; A=[2 1 -3;4 -2 -2;-1 0.5 -0.5];y=[1;3;1.5];</code></pre></li>
+<li><p>线性方程系统的解，即方程（2.6），可以直接通过下面命令求取：</p>
+<pre><code> octave:94&gt; A\y</code></pre>
+<p>就是如此容易！</p></li>
+</ol>
+<p><strong>刚刚发生了什么</strong></p>
+<p>非常清楚，发生了什么。命令93，我们初始化3有方程（2.6）线性方程系统矩阵A和向量y。然后我们使用左除求解这个方程系统。第6章里，我们会深入左除如何高效处理大系统。</p>
+<p>让我们尝试一下右除操作，即使我们知道会产生问题：</p>
+<pre><code>    octave:95&gt; A/y</code></pre>
+<p>我们看到了期待的错误信息。右除操作符将会在下面的命令中有效：</p>
+<pre><code>    octave:96&gt; A/A</code></pre>
+<p>这是一个3x3单位矩阵I。这个结果很容易理解，因为A/A就等于<span class="math inline"><em>A</em><em>A</em><sup> − 1</sup></span>。注意，由于数值修约的错误和有限精度，矩阵中的成员在对角上并不是完全等于1。，非对角元素也不完全等于0，Octave因此将元素用浮点格式进行显示。</p>
+<p>那么命令A？尝试一下，检查一下你的答案。</p>
+<p>对于左除和右除操作符的定义也适用于标量变量。回想一下变量a的值为2：</p>
+<pre><code>    octave:97&gt; 1/a</code></pre>
+<p>结果为分数1/2的值。现在，再试一下左除操作符：</p>
+<pre><code>    octave:98&gt; 1\a</code></pre>
+<p>结果等同于分数2/1，a为分子。我们可以说a\1等于1/a。</p>
+<p>正如我们学会的，.操作符可以被用来连接其他操作符，对于左除和右除来说，这个也成立：</p>
+<pre><code>    octave:99&gt; a./A
+    octave:100&gt; a.\A</code></pre>
+<p>非常重要，需要强调一点，element-wise进行左除和右除操作必须要使用.操作符。这个与加法，减法和乘法有区别。</p>
+<p>对于element-wise矩阵除法，我们可以使用：</p>
+<pre><code>    octave:101&gt; A./A</code></pre>
+<p><strong>复数变量的基本数学运算</strong></p>
+<p>对于复数变量进行数学运算也是很重要的。实际上，我们可以将这些操作认为是实数，只不过是复数变量的特例操作。</p>
+<p>当对两个复数相加，我们将实数部分和虚数部分分别相加。Octave里，我们可以简单地使用+操作符：</p>
+<pre><code>    octave:102&gt; z=1+2I;w=2 -3I;
+    octave:103&gt; z+w</code></pre>
+<p>减法也一样：</p>
+<pre><code>    octave:104&gt; z-w</code></pre>
+<p>z和w的乘法很简单：</p>
+<p>让我们看一下，Octave是否遵循：</p>
+<pre><code>    octave:105&gt; z*w</code></pre>
+<p>现在，你也可以回想一下，对两个复数进行除法操作，你可以使用分母的共轭复数将分子和分母同时相乘。例子z/w中，我们得到：</p>
+<p>为了在Octave中执行这种除法，我们可以简单地使用左除和右除操作符：</p>
+<pre><code>    octave:106&gt; z/w
+    octave:107&gt; w/z</code></pre>
+<p>就像我们对实数所做的那样。</p>
+<p>你也可以对复数向量和矩阵执行加法，减法，乘法。你也可以使用左除来求解复数线性方程系统，如同实数方程系统一样。</p>
+<p><strong>数学运算总结</strong></p>
+<p><strong>比较运算符和优先规则</strong></p>
+<p>在前面部分，我们讨论了基本数学运算操作。在这一节里，我们会学习如何对不同变量进行比较。Octave（与其他编程相类似）也使用了直观的操作字符。它们是：</p>
+<p>Octave比较操作符来说，非零值为真，0值为假。让我们看一些例子，回想一下命令93中的矩阵A：</p>
+<pre><code>    octave:108&gt; A(2,1)==1
+    octave:109&gt; A(2,1)==2
+    octave:110&gt; A(2,1)&gt; 0
+    octave:111&gt; A(2,1)!=4</code></pre>
+<p>除了使用！=来表示不等于以外，也可以使用～=。</p>
+<p>熟悉其他编程语言的话，你对这些操作符应该比较熟悉了。但是，Octave里，你还可以对向量和矩阵进行比较操作。想要将矩阵A的第1列与其他向量进行比较，我们使用：</p>
+<pre><code>    octave:112&gt; A(:,1) &gt;=[2;2; 0]
+    octave:113&gt; A &gt; ones(3,3)</code></pre>
+<p>也就是说，比较操作是这个元素进行的。这一维这数组的维度要匹配，初逢其中一个是标量变量。</p>
+<pre><code>    octave:114&gt; &quot;a&quot;==&quot;a&quot;</code></pre>
+<p>来比较字符变量a与字符，还有：</p>
+<pre><code>    octave:115&gt; &quot;Hello&quot;==&quot;henno&quot;</code></pre>
+<p>会对字符串“hello”和”henno“的所有元素逐个进行比较。但是，摩纳哥另”hello“==”helloo”是无效的，因为两个字符串维数不匹配。如果你想对两个字符串进行比较，可以使用strcmp（字符串比较的缩写）：</p>
+<pre><code>    octave:116&gt; strcmp(&quot;hello&quot;,&quot;helloo&quot;)</code></pre>
+<p>意味着结果为假，因为两个字符串是不同的。</p>
+<p>正如上面提到的，比较操作符的结果非真即假。在计算机科学里，我们将这称为布尔类型，以英国数学家Geoge Boole命名。注意，因为Octave是向量化编程语言，得到的布尔值可以是数组，其元素为真或者假。</p>
+<p><strong>优先规则</strong></p>
+<p>你可以是另单行命令进行很多操作，理解这些命令是如何被解析是很重要的。</p>
+<p><strong>实战时刻–优先法则</strong></p>
+<ol type="1">
+<li><p>让我们看一个例子：</p>
+<pre><code> octave:117&gt; A*y+a</code></pre></li>
+</ol>
+<p>这里，Octave首先将A和y相乘，然后，将a价值得到的结果上。我们说乘法比加法的优先度更高。</p>
+<ol start="2" type="1">
+<li><p>让我们再尝试2个例子：</p>
+<pre><code> octave:118&gt; A*y.^2
+ octave:119&gt; (A*y).^2</code></pre></li>
+</ol>
+<p><strong>刚刚发生了什么</strong></p>
+<p>命令118中，因为》.^的优先度要高于*，Octavae首先对计算逐个元素的操作y.^2，然后执行乘法操作。命令119中，通过应用括号，我们先运行乘法，然后再做面运算。</p>
+<p><strong>一些提示</strong></p>
+<p>除了使用左除和右除对线性方程系统进行计算以外，我们也可以手动计算。让我们尝试一下方程（2.6）描述的线性方程系统，使用方程（2，0）来进行求解。首先，我们计算矩阵A的逆（如果存在的话）。这可以通过inv函数实现：</p>
+<pre><code>    octave:120&gt; inverse_A=inv(A)</code></pre>
+<p>我们现在可以简单地运行乘法来得到答案：</p>
+<pre><code>    octave121&gt; inverse_A*y</code></pre>
+<p>输出结果与命令94接近。现在，当Octave运行左除操作时，它并不是首先对A求逆，让后将结果与y相乘。Octave有很多的算法用于这个操作，取决于矩阵的性质。这些算法得到的结果通常比单独的步骤要更准确，更快。这个例子里，没哟太大的差别，因为这个问题太简单。</p>
+<p>如果我们将矩阵A替换成下面的矩阵：</p>
+<p>尝试着求解对应的线性方程系统，Octave会显示出浸膏信息：</p>
+<pre><code>    octave:122&gt; A=[2 1 -3;4 -2 -2;-2 1 1];A\y</code></pre>
+<p>这个例子中结果。重要的是警告信息告诉我们矩阵不是，。</p>
+
+</body>
+</html>
